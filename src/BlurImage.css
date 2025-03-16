@@ -1,0 +1,21 @@
+#image {
+	width: 940px;
+	height: 360px;
+	overflow: hidden;
+	background-image: url("https://dummyjson.com/image/940x360");
+}
+
+#image .blur {
+	background-image: url("https://dummyjson.com/image/940x360");
+	background-position: center right;
+	-webkit-filter: blur(3px);
+	-moz-filter: blur(3px);
+	-o-filter: blur(3px);
+	-ms-filter: blur(3px);
+	filter: blur(3px);
+	filter: blur(3px);
+	float: right;
+	height: 100%;
+	width: 360px;
+	margin-right: -1px;
+}

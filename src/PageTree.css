@@ -1,0 +1,22 @@
+.children-container {
+	position: relative;
+}
+
+.children-container:before {
+	content: "";
+	position: absolute;
+	left: 7px;
+	top: 0;
+	bottom: 0;
+	width: 2px;
+	background-color: red;
+}
+
+.chevron {
+	/* display: flex; */
+	transition: transform 0.3s linear;
+}
+
+.chevron.expand {
+	transform: rotate(90deg);
+}

@@ -1,0 +1,86 @@
+/* Avatar */
+.avatar-picker {
+	border: 1px solid blue;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 20px;
+	background-color: lightcyan;
+	gap: 20px;
+	position: relative;
+}
+
+.avatar {
+	width: 60px;
+	height: 60px;
+	cursor: pointer;
+	position: relative;
+}
+
+.avatar img {
+	width: 100%;
+	border-radius: 50%;
+	border: 3px solid transparent;
+	transition: border 0.5s ease-in-out;
+	background-color: aqua;
+	background-clip: padding-box;
+}
+
+.circle-loader {
+	width: 100%;
+	border-radius: 50%;
+	border: 3px dashed green;
+	border-right-color: transparent;
+	border-top-color: transparent;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	animation: spinner 1s linear infinite;
+}
+
+@keyframes spinner {
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.avatar img:hover {
+	border: 3px solid blue;
+}
+
+.avatar.selected img {
+	border: 3px solid red;
+}
+
+.avatars-list {
+	position: absolute;
+	top: 100px;
+	left: 200px;
+	padding: 10px;
+	background-color: lightslategrey;
+	width: 230px;
+	display: flex;
+	align-items: center;
+	align-content: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 20px;
+	border-radius: 8px;
+}
+
+.avatars-list::before {
+	content: "";
+	position: absolute;
+	bottom: 100%;
+	left: 50%;
+	border-width: 8px;
+	border-style: solid;
+	border-color: transparent transparent red transparent;
+	transform: translateX(-50%);
+}

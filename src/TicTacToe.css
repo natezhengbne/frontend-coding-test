@@ -1,0 +1,47 @@
+/* Tic Tac Toe*/
+.table-container {
+    box-sizing: border-box;
+  }
+
+  .cell {
+      padding: 30px;
+      background-color: lightcyan;
+      cursor: pointer;
+
+      width: 60px;
+      height: 60px;
+    border: 1px solid transparent
+  }
+
+  .cell.win {
+      background-color: brown;
+  }
+
+  .cell:hover {
+      border: 1px solid blue;
+  }
+
+  .game-container button {
+      margin-top: 10px;
+      width: 100%;
+      background-color: lightcoral;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    width: min-content;
+  }
+
+  .grid-item {
+    background: lightblue;
+    padding: 10px;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+  }
+
+  .grid-item:hover {
+      outline: 1px solid blue;
+  }
