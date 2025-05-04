@@ -1,0 +1,38 @@
+.clock {
+	padding: 30px;
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+    border: 8px solid yellow;
+	background-color: aqua;
+
+	position: relative;
+}
+
+.dot {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+
+	background-color: black;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.hand {
+    z-index: 10;
+	position: absolute;
+	background: black;
+	top: 50%;
+	left: 50%;
+	transform-origin: top left;
+	transform: translate(-50%, -50%);
+}
+
+.second {
+	width: 45%;
+	height: 2px;
+	background-color: red;
+}

@@ -5,10 +5,16 @@ import TicTacToe from "./TicTacToe";
 import BarChartContainer from "./BarChart";
 import AvatarPicker from "./AvatarPicker";
 import BlurImage from "./BlurImage";
+import Dialog from "./Dialog";
+import Clock from "./Clock";
+import SnakeGame from "./SnakeGame";
 
 function App() {
 	return (
 		<div className="app">
+			<SnakeGame />
+			<Clock />
+			<Dialog />
 			<SearchBar />
 			<PageTree />
 			<TicTacToe />
@@ -27,6 +33,7 @@ function App() {
 
 const JiraIssueView = () => {
 	const handleSubmit = (event: any) => {
+		window.history.pushState({}, "", "/test");
 		const formData = new FormData(event.currentTarget);
 
 		const title = formData.get("title");

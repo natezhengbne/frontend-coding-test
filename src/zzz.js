@@ -2,26 +2,71 @@
  * feature flag
  */
 
-const FEATURE_FLAGS = ["", ""];
+const SAMPLE_FEATURE = {
+	show_dialog_box: true,
+	enable_new_pricing: true,
+  };
 
-const fetchAllFeatureFlags = () => {
+  const Cache = {
+	features: {},
+	timestamp: null,
+  };
+
+  const MAX_TTL = 10000;
+
+  function fetchAllFeatures() {
+	console.log("CALL BACKEND");
 	return new Promise((resolve) => {
-		setTimeout(() => resolve(FEATURE_FLAGS));
+	  setTimeout(() => resolve(SAMPLE_FEATURE), 500);
 	});
-};
+  }
 
-async function getFeatureFlag(feature, defaultValue) {
-	const flags = await fetchAllFeatureFlags();
-	if (flags.includes(feature)) {
-		return true;
+  let isLoading = false;
+
+  function getFeatureState(featureName, defaultName) {
+	const isCachePresent = Object.keys(Cache.features).length;
+	const isExpired = Date.now() - Cache.timestamp > MAX_TTL;
+
+	if (!isExpired && isCachePresent) {
+	  console.log("hit the cache");
+	  const value = Cache.features.hasOwnProperty(featureName)
+		? Cache.features[featureName]
+		: defaultName;
+	  return Promise.resolve(value);
 	}
 
-	return defaultValue;
-}
+	// no cache hitted
+	//   console.log("no cache hitted");
+	isLoading = true;
+	return fetchAllFeatures()
+	  .then((data) => {
+		Cache.features = data;
+		Cache.timestamp = Date.now();
+		return data.hasOwnProperty(featureName) ? data[featureName] : defaultName;
+	  })
+	  .finally(() => (isLoading = false));
+  }
+
 
 /**
  * bind
  */
+
+// Override console.log directly
+console.log = function(...args) {
+	const timestamp = new Date().toISOString();
+	originalLog.call(console, `[${timestamp}]`, ...args);
+  };
+
+const originalLog = console.log;
+Object.defineProperty(console, "log", {
+  configurable: true,
+  writable: true,
+  value: function (...args) {
+    const timestamp = new Date().toLocaleTimeString();
+    originalLog.call(console, `[${timestamp}]`, ...args);
+  },
+});
 
 /**
  * Analytics
