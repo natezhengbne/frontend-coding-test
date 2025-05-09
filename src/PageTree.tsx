@@ -26,7 +26,14 @@ const treeData: TreeNode[] = [
 				name: "Technical",
 				children: [
 					{ id: "1-2-1", name: "Architecture" },
-					{ id: "1-2-2", name: "API Docs" },
+					{
+						id: "1-2-2",
+						name: "API Docs",
+						children: [
+							{ id: "1-2-2-1", name: "v1.0" },
+							{ id: "1-2-2-2", name: "v2.0" },
+						],
+					},
 				],
 			},
 		],
@@ -61,8 +68,7 @@ type TreeComponentProps = {
 };
 
 const TreeComponent: FC<TreeComponentProps> = (props) => {
-	const { id, name, children: subNode } = props.node;
-	const nodeDeep = id.split("-").length;
+	const { name, children: subNode } = props.node;
 	const [isOpen, setIsOpen] = useState(false);
 	const hasChildren = subNode && subNode.length > 0;
 
@@ -71,7 +77,7 @@ const TreeComponent: FC<TreeComponentProps> = (props) => {
 	};
 
 	return (
-		<div style={{ paddingLeft: `${nodeDeep * 20}px` }}>
+		<ul>
 			<div
 				onClick={handleClick}
 				style={{
@@ -81,28 +87,18 @@ const TreeComponent: FC<TreeComponentProps> = (props) => {
 					cursor: "pointer",
 				}}
 			>
-				{/* <motion.span
-					// style={{ display: "inline-block" }}
-					// style={{ display: "flex" }}
-					animate={{
-						rotate: isOpen ? 90 : 0,
+				<LuChevronRight
+					style={{
+						visibility: hasChildren ? "visible" : "hidden",
 					}}
-				>
-					<LuChevronRight />
-				</motion.span> */}
-
-                <LuChevronRight className={`chevron ${isOpen ? "expand": ""}`} />
-				<div>{name}</div>
+					className={`chevron ${isOpen ? "expand" : ""}`}
+				/>
+				<div style={{ userSelect: "none" }}>{name}</div>
 			</div>
 			<AnimatePresence>
 				{isOpen && hasChildren && (
 					<motion.div
 						className="children-container"
-						// style={{
-						//     borderLeftWidth: "1px",
-						//     borderLeftColor: "black",
-						//     borderLeftStyle: "solid"
-						// }}
 						variants={{
 							collapsed: {
 								opacity: 0,
@@ -119,11 +115,15 @@ const TreeComponent: FC<TreeComponentProps> = (props) => {
 						exit="collapsed"
 					>
 						{subNode.map((node) => {
-							return <TreeComponent key={node.id} node={node} />;
+							return (
+								<li key={node.id}>
+									<TreeComponent node={node} />
+								</li>
+							);
 						})}
 					</motion.div>
 				)}
 			</AnimatePresence>
-		</div>
+		</ul>
 	);
 };

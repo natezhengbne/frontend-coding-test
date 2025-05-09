@@ -28,7 +28,6 @@ function TicTacToe() {
 		cellId: string
 	): string[] | false => {
 		const position = cellId.split("");
-		console.log("position", position);
 		const x = Number(position[1]);
 		const y = Number(position[0]);
 
@@ -94,8 +93,15 @@ function TicTacToe() {
 										key={columnId}
 										className={`cell ${isWin ? "win" : ""}`}
 									>
-										{isCircle && <FiCircle />}
-										{isCross && <FiX />}
+										<div
+											style={{
+												display: "flex",
+												justifyContent: "center",
+											}}
+										>
+											{isCircle && <FiCircle />}
+											{isCross && <FiX />}
+										</div>
 									</td>
 								);
 							})}
@@ -103,7 +109,7 @@ function TicTacToe() {
 					);
 				})}
 			</table>
-			<div className="grid-container">
+			{/* <div className="grid-container">
 				{[...Array(columns * rows).keys()].map((keyId) => {
 					const rowId = Math.floor(keyId / rows);
 					const columnId =
@@ -131,8 +137,10 @@ function TicTacToe() {
 						</div>
 					);
 				})}
-			</div>
-			<button onClick={handleRefresh}>{winner ? "Again" : "Clean"}</button>
+			</div> */}
+			<button style={{ width: "min-content" }} onClick={handleRefresh}>
+				{winner ? "Again" : "Clean"}
+			</button>
 		</div>
 	);
 }

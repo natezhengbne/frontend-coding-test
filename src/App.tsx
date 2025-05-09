@@ -83,6 +83,7 @@ function App() {
  */
 
 const JiraIssueView = () => {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const handleSubmit = (event: any) => {
 		window.history.pushState({}, "", "/test");
 		const formData = new FormData(event.currentTarget);
