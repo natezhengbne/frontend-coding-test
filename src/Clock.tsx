@@ -8,7 +8,6 @@ const Clock = () => {
 		const now = new Date();
 		const seconds = now.getSeconds();
 		const secondsDeg = seconds * 6;
-		console.log(seconds)
 
 		if (secondHandRef.current) {
 			secondHandRef.current.style.transform = `rotate(${secondsDeg}deg)`;
@@ -16,6 +15,7 @@ const Clock = () => {
 	};
 
 	useEffect(() => {
+		handleRotate();
 		const rotate = setInterval(handleRotate, 1000);
 
 		return () => {

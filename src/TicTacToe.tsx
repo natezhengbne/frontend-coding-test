@@ -31,7 +31,7 @@ function TicTacToe() {
 		const x = Number(position[1]);
 		const y = Number(position[0]);
 
-		// horizontal x
+		// horizontal x r->l
 		if (x + winCount <= rows) {
 			const lineNodes = [cellId];
 			for (let i = 1; i < winCount; i++) {
